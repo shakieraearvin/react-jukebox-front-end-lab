@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import * as trackService from './services/trackService';
 import TrackList from './components/TrackList/TrackList';
+import NowPlaying from './components/NowPlaying/NowPlaying';
 import TrackDetail from './components/TrackDetail/TrackDetail';
 import TrackForm from './components/TrackForm/TrackForm';
-import './App.css'
+
 
 
 const App = () => {
   const [tracks, setTracks] = useState([]);
   const [selected, setSelected] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [nowPlaying, setNowPlaying] = useState(null);
 
 
   // Create a new useEffect
@@ -106,6 +108,18 @@ const App = () => {
       console.log(err);
     }
   };
+
+  const handleNowPlayingTrack = (trackId) => {
+    
+    const trackToPlay = tracks.find((track) => track._id === trackId);
+    if (trackToPlay) {
+     
+      setNowPlaying(trackToPlay);
+    }
+    
+  }
+
+  
   
   // Return the new TrackList component inside a React fragment
   return (
@@ -127,14 +141,13 @@ const App = () => {
         <TrackDetail selected={selected}
          handleFormView={handleFormView}
          handleDeleteTrack={handleDeleteTrack}
+         handleNowPlayingTrack={handleNowPlayingTrack}
          />
       )}
+      <NowPlaying selected={nowPlaying} />
     </>
   );
 };
-
-
-
 
 
 export default App;

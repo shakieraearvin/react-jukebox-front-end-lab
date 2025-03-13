@@ -11,19 +11,17 @@ const TrackDetail = (props) => {
     // return statement if props.selected has a truthy value
     return (
         <div>
-        <h1>{props.selected.title}</h1>
-        <h2>
-          Age: {props.selected.artist} year{props.selected.artist > 1 ? 's' : ''} old
-        </h2>
-        {/* Our new button, wrapped in a div */}
-        <div>
+          <h2>Title: {props.selected.title}</h2>
+          <h2>Artist: {props.selected.artist}</h2>
           <button onClick={() => props.handleFormView(props.selected)}>
             Edit Track
           </button>
+          <button onClick={() => props.handleDeleteTrack(props.selected._id)}>
+            Delete Track
+          </button>
         </div>
-      </div>
-    );
-  };
+      );
+    };
   
   export default TrackDetail;
   
